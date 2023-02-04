@@ -1,13 +1,6 @@
 <div align="justify">
-<h1> Description </h1>
-
-<p>
-This program is a collection of themes and plugins, full of functions and colors, 
-to make your zsh more functional and elegant!
-</p>
-
 <p align="center">
-	<img src="https://github.com/lollipopfvwm/lollipopfvwm/blob/main/images/LolliPop.png"
+	<img src="https://github.com/oh-my-ps1/oh-my-ps1/blob/main/fixed/init.png"
 	align="right" width="300"/>
 	<h1>Welcome   <img src="https://cdn-icons-png.flaticon.com/512/5632/5632392.png" align="center" width="30"/></h1>
 	<p>This is my personal Fvwm3 window manager configuration.</p>
