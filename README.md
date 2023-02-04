@@ -1,7 +1,7 @@
 <div align="justify">
 <p align="center">
 	<img src="https://github.com/oh-my-ps1/oh-my-ps1/blob/main/fixed/init.png"
-	align="right" width="500"/>
+	align="right" width="600"/>
 	<h1>Welcome   <img src="https://cdn-icons-png.flaticon.com/512/5632/5632392.png" align="center" width="30"/></h1>
 	<p>This is my personal Fvwm3 window manager configuration.</p>
 	<p>Created and modified over many years, aiming to improve and simplify settings.</p>
