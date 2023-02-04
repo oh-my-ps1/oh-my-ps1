@@ -1,4 +1,9 @@
-### Hi there 👋
+### Description
+
+<p>
+This program is a collection of themes and plugins, full of functions and colors, 
+to make your zsh more functional and elegant!
+</p>
 
 <!--
 **oh-my-ps1/oh-my-ps1** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
