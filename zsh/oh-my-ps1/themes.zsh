@@ -3,7 +3,7 @@ source $(dirname "$0")/icons.zsh
 
 rd="%B%F{$((RANDOM % 100))}"
 
-colorsheme="nord"
+colorsheme="dracula"
 
 case $colorsheme in
 	dracula) dracula ;;
@@ -52,9 +52,11 @@ git_prompt_info() {
 
 
 welcome="%B%F{$magenta}Hellow%f"
-user_info="$welcome %n  %B%F{$blue}`date +%A`%f, \
+dir_info='%B%K{$black} %1~ %k'
+user_info="$welcome %n $dir_info  %B%F{$blue}`date +%A`%f, \
 %B%F{$magenta}`date +%d`%f %B%F{$blue}`date +%B`%f \
 %B%F{$magenta}`date +%Y`%f %B%F{$blue}%B%K{$black} `date +%H:%M` %k%f"
+
 
 PROMPT='%B%F{$white}$(top_line)'
 PROMPT+='$user_info'

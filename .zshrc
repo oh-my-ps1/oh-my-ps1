@@ -13,6 +13,16 @@
 export PATH="$HOME/.local/bin":$PATH
 export FILE_MANAGER="nemo"
 export TERM="wezterm"
+# set variables
+PATH="/usr/local/bin:/usr/local/sbin/:$PATH"
+# enable command history
+HISTFILE=~/.zsh_history
+HISTSIZE=10000000
+SAVEHIST=10000000
+setopt histignorealldups # Ignore duplicates in history
+setopt HIST_IGNORE_SPACE # Ignore commands that begin with a space in history
+LS_COLORS='rs=0:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:tw=30;42:ow=34;42:st=37;44:ex=01;32:';
+
 
 # Uncomment to select a theme for the prompt
 # Restart terminal or zsh with "zsh"
@@ -23,61 +33,27 @@ export TERM="wezterm"
 #[[ $- != *i* ]] && return
 #[[ $TERM != screen* ]] && exec tmux -2
 
-# use to install packages
-# the packages will be displayed on the screen
-# showing the package information focused on the right side
-# will also be displayed if the package is installed
-# you can use the keyboard to navigate through the options and also search for a specific package
-
-# Install package using fzf
-function install(){
-  pacman -Sl | awk '{print $2" "$4}' \
-  | column -t | fzf --reverse --preview 'pacman -Si {1}' \
-  | xargs -ro sudo pacman -S
-}
-
-# this function installs packages from the AUR repository in the same way as the previous function
-
-function yinstall(){
-  yay -Sl | awk '{print $2" "$4}' \
-  | column -t | fzf --reverse --preview 'yay -Si {1}' \
-  | xargs -ro yay -S
-}
-
-# use to delete packages,
-# Attention! the packages will be removed
-# along with your dependencies
-# and configuration files.
-
-function delete(){
-  pacman -Sl | awk '{print $2" "$4}' \
-  | column -t | grep instalado | fzf --reverse --preview 'pacman -Si {1}' \
-  | awk '{print $1}' | xargs -ro sudo pacman -Rscn
-
-}
-
 # Source plugins
-
+# autosuggestions
 source ~/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+# syntax-highlighting
 source ~/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-# Functions
+source ~/.config/zsh/oh-my-ps1/highlighting.zsh
+# functions
 source ~/.config/zsh/functions.sh
-# Sourse prompt themes
+# sourse prompt themes
 source ~/.config/zsh/oh-my-ps1/themes.zsh
-
-# Use aliases
+# use aliases
 source ~/.config/zsh/alias.zsh
 
-# Prompt theme
+# prompt theme
 prompt_a
 
-# Set prompt
-#===========
+# set prompt
 unsetopt ALL_EXPORT
 setopt PROMPT_SUBST
 
-# Set/unset ZSH options
-#======================
+# set/unset ZSH options
 setopt HIST_IGNORE_ALL_DUPS
 setopt sunkeyboardhack
 setopt INC_APPEND_HISTORY SHARE_HISTORY
@@ -87,48 +63,32 @@ setopt CORRECT
 SPROMPT='zsh: Mudar de %F{red}%R%f para %F{green}%r%f [y or n]? '
 setopt EXTENDED_HISTORY
 
-# Setopt HASH_CMDS
-#=================
+# setopt HASH_CMDS
 setopt MENUCOMPLETE
 setopt ALL_EXPORT
 
-# Set/unset  shell options
-#=========================
+# set/unset  shell options
 setopt   notify globdots correct pushdtohome cdablevars autolist
 setopt   correctall autocd recexact longlistjobs
 setopt   autoresume histignoredups pushdsilent
 setopt   autopushd pushdminus extendedglob rcquotes mailwarning
 unsetopt bgnice autoparamslash
 
-setopt autocd        # Automatically cd into typed directory.
-stty stop undef        # Disable ctrl-s to freeze terminal.
+setopt autocd                 # Automatically cd into typed directory.
+stty stop undef               # Disable ctrl-s to freeze terminal.
 setopt interactive_comments
 
-# Autoload zsh modules when they are referenced
-#==============================================
+# autoload zsh modules when they are referenced
 autoload -U history-search-end
 zmodload -a zsh/stat stat
 zmodload -a zsh/zpty zpty
 zmodload -a zsh/zprof zprof
 
-#zmodload -ap zsh/mapfile mapfile
-#================================
+# zmodload -ap zsh/mapfile mapfile
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
 
-# Set variables
-#==============
-PATH="/usr/local/bin:/usr/local/sbin/:$PATH"
-# Enable command history
-HISTFILE=~/.zsh_history
-HISTSIZE=10000000
-SAVEHIST=10000000
-setopt histignorealldups # Ignore duplicates in history
-setopt HIST_IGNORE_SPACE # Ignore commands that begin with a space in history
-LS_COLORS='rs=0:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:tw=30;42:ow=34;42:st=37;44:ex=01;32:';
-
-# Load simple
-#============
+# load simple
 autoload simple zsh/terminfo
 if [[ "$terminfo[simple]" -ge 8 ]]; then
    simple
@@ -139,8 +99,7 @@ for color in RED GREEN YELLOW BLUE MAGENTA CYAN WHITE; do
    (( count = $count + 1 ))
 done
 
-# Completion Styles
-#==================
+# completion Styles
 autoload -U compinit
 compinit
 
@@ -155,20 +114,16 @@ zstyle -e ':completion:*:approximate:*' max-errors \
 zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %p%s'
 
 # list of completers to use
-#==========================
 zstyle ':completion:*::::' completer _expand _complete _ignored _approximate
 
 # allow one error for every three characters typed in approximate completer
-#==========================================================================
 zstyle -e ':completion:*:approximate:*' max-errors \
     'reply=( $(( ($#PREFIX+$#SUFFIX)/2 )) numeric )'
 
 # insert all expansions for expand completer
-#===========================================
 zstyle ':completion:*:expand:*' tag-order all-expansions
 
 # formatting and messages
-#========================
 zstyle ':completion:*' verbose yes
 zstyle ':completion:*:descriptions' format '%B%d%b'
 zstyle ':completion:*:messages' format '%d'
@@ -177,34 +132,27 @@ zstyle ':completion:*:corrections' format '%B%d (errors: %e)%b'
 zstyle ':completion:*' group-name ''
 
 # match uppercase from lowercase
-#===============================
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
 # offer indexes before parameters in subscripts
-#==============================================
 zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
 
 # command for process lists, the local web server details and host completion
 # on processes completion complete all user processes
-#=============================================================================
 zstyle ':completion:*:processes' command 'ps -au$USER'
 
 # add simple to processes for kill completion
-#============================================
 zstyle ':completion:*:*:kill:*:processes' list-simple '=(#b) #([0-9]#)*=0=01;31'
 
 # NEW completion:
-#================
 zstyle ':completion:*' hosts $(awk '/^[^#]/ {print $2 $3" "$4" "$5}' /etc/hosts \
 | grep -v ip6- && grep "^#%" /etc/hosts | awk -F% '{print $2}')
 
-# Filename suffixes to ignore during completion (except after rm command)
-#=========================================================================
+# filename suffixes to ignore during completion (except after rm command)
 zstyle ':completion:*:*:(^rm):*:*files' ignored-patterns '*?.o' '*?.c~' \
     '*?.old' '*?.pro'
 
 # ignore completion functions (until the _ignored completer)
-#===========================================================
 zstyle ':completion:*:functions' ignored-patterns '_*'
 zstyle ':completion:*:*:*:users' ignored-patterns \
         adm apache bin daemon games gdm halt ident junkbust lp mail mailnull \
@@ -215,7 +163,6 @@ zstyle ':completion:*:*:*:users' ignored-patterns \
         proxy syslog www-data mldonkey sys snort
 
 # SSH Completion
-#===============
 zstyle ':completion:*:scp:*' tag-order \
    files users 'hosts:-host hosts:-domain:domain hosts:-ipaddr"IP\ Address *'
 zstyle ':completion:*:scp:*' group-order \
@@ -226,7 +173,7 @@ zstyle ':completion:*:ssh:*' group-order \
    hosts-domain hosts-host users hosts-ipaddr
 zstyle '*' single-ignored show
 
-# History beginning search
+# history beginning search
 bindkey '^[[A' history-beginning-search-backward
 bindkey '^[[B' history-beginning-search-forward
 bindkey '^[[1;2A' up-line-or-history
@@ -239,7 +186,3 @@ bindkey -a 'K' vi-up-line-or-history
 bindkey -a 'J' vi-down-line-or-history
 
 bindkey '^[[3~' delete-char; bindkey -a '^[[3~' delete-char # Make delete key work as expected
-
-
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

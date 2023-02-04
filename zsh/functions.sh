@@ -1,53 +1,33 @@
-#!/usr/bin/env bash
-
-###### Set kitty theme ######
-function ktheme() {
-kitty_dir=~/.config/kitty	
-
-KittyCat() {
-clear
-cat << EOF
-
-      (Miau)
-\   /\ \/
- ) ( ') 
-(  / )
- \(_)|
-
-EOF
-}
-
-	kdark() {
-		cat $kitty_dir/dark > $kitty_dir/kitty.conf
-		kitty @ set-colors --all .config/kitty/kitty.conf > /dev/null
-		KittyCat
-	}
-
-	klight() {
-		cat $kitty_dir/light > $kitty_dir/kitty.conf
-		kitty @ set-colors --all .config/kitty/kitty.conf > /dev/null
-		KittyCat
-	}
-
-
-	case $1 in
-		-d) kdark ;;
-		-l) klight ;;
-	esac
-}
-
-ttheme() {
-	case $1 in
-		-d) tmux source-file .tmux/themes/dark.conf ;;
-		-l) tmux source-file .tmux/themes/light.conf ;;
-	esac
-}
+#!/usr/bin/env zsh
 
 # function to do an ls for each cd
 function lcd {
     builtin cd "$@" && logo-ls;
 }
 
-topy() {
-    history | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl |  head -n 21
+# Install package using fzf
+function install(){
+  pacman -Sl | awk '{print $2" "$4}' \
+  | column -t | fzf --reverse --preview 'pacman -Si {1}' \
+  | xargs -ro sudo pacman -S
+}
+
+# this function installs packages from the AUR repository in the same way as the previous function
+
+function yinstall(){
+  yay -Sl | awk '{print $2" "$4}' \
+  | column -t | fzf --reverse --preview 'yay -Si {1}' \
+  | xargs -ro yay -S
+}
+
+# use to delete packages,
+# Attention! the packages will be removed
+# along with your dependencies
+# and configuration files.
+
+function delete(){
+  pacman -Sl | awk '{print $2" "$4}' \
+  | column -t | grep instalado | fzf --reverse --preview 'pacman -Si {1}' \
+  | awk '{print $1}' | xargs -ro sudo pacman -Rscn
+
 }

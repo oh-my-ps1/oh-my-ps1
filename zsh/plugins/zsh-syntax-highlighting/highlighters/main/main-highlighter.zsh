@@ -27,58 +27,6 @@
 # vim: ft=zsh sw=2 ts=2 et
 # -------------------------------------------------------------------------------------------------
 
-source ~/.config/zsh/oh-my-ps1/colors.zsh
-source ~/.config/zsh/oh-my-ps1/themes.zsh
-
-case $colorsheme in
-  dracula) dracula ;;
-  gruvbox) gruvbox ;;
-  gruvbox-light) gruvbox-light ;;
-  nord) nord ;;
-  catppuccin-frappe) catppuccin-frappe ;;
-  catppuccin-latte) catppuccin-latte ;;
-  catppuccin-Macchiato) catppuccin-macchiato ;;
-  catppuccin-mocha) catppuccin-mocha ;;
-  solarized) solarized ;;
-  tokyo-night) tokyo-night ;;
-  onedark) onedark ;;
-  monokai) monokai ;;
-  everforest) everforest ;;
-esac
-
-# Define default styles.
-: ${ZSH_HIGHLIGHT_STYLES[default]:=fg=$red,bold,bg=$black}
-: ${ZSH_HIGHLIGHT_STYLES[unknown-token]:=fg=$red,bold}
-: ${ZSH_HIGHLIGHT_STYLES[reserved-word]:=fg=$yellow}
-: ${ZSH_HIGHLIGHT_STYLES[suffix-alias]:=fg=$green,underline,bold}
-: ${ZSH_HIGHLIGHT_STYLES[precommand]:=fg=$red,underline,bold}
-: ${ZSH_HIGHLIGHT_STYLES[commandseparator]:=none}
-: ${ZSH_HIGHLIGHT_STYLES[path]:=underline}
-: ${ZSH_HIGHLIGHT_STYLES[path_pathseparator]:=}
-: ${ZSH_HIGHLIGHT_STYLES[path_prefix_pathseparator]:=}
-: ${ZSH_HIGHLIGHT_STYLES[globbing]:=fg=$blue,bold}
-: ${ZSH_HIGHLIGHT_STYLES[history-expansion]:=fg=$blue,bold}
-: ${ZSH_HIGHLIGHT_STYLES[command-substitution]:=none}
-: ${ZSH_HIGHLIGHT_STYLES[command-substitution-delimiter]:=fg=$magenta,bold}
-: ${ZSH_HIGHLIGHT_STYLES[process-substitution]:=none}
-: ${ZSH_HIGHLIGHT_STYLES[process-substitution-delimiter]:=fg=$magenta,bold}
-: ${ZSH_HIGHLIGHT_STYLES[single-hyphen-option]:=none}
-: ${ZSH_HIGHLIGHT_STYLES[double-hyphen-option]:=none}
-: ${ZSH_HIGHLIGHT_STYLES[back-quoted-argument]:=none}
-: ${ZSH_HIGHLIGHT_STYLES[back-quoted-argument-delimiter]:=fg=$magenta,bold}
-: ${ZSH_HIGHLIGHT_STYLES[single-quoted-argument]:=fg=$cyan,bold}
-: ${ZSH_HIGHLIGHT_STYLES[double-quoted-argument]:=fg=$yellow,bold}
-: ${ZSH_HIGHLIGHT_STYLES[dollar-quoted-argument]:=fg=$magenta,bold}
-: ${ZSH_HIGHLIGHT_STYLES[rc-quote]:=fg=$cyan,bold}
-: ${ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]:=fg=$cyan,bold}
-: ${ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]:=fg=$cyan,bold}
-: ${ZSH_HIGHLIGHT_STYLES[back-dollar-quoted-argument]:=fg=$cyan,bold}
-: ${ZSH_HIGHLIGHT_STYLES[assign]:=none}
-: ${ZSH_HIGHLIGHT_STYLES[redirection]:=none}
-: ${ZSH_HIGHLIGHT_STYLES[comment]:=fg=$black,bold}
-: ${ZSH_HIGHLIGHT_STYLES[named-fd]:=none}
-: ${ZSH_HIGHLIGHT_STYLES[arg0]:=fg=$green,bold,bg=$black,bold}
-
 # Whether the highlighter should be called or not.
 _zsh_highlight_highlighter_main_predicate()
 {
