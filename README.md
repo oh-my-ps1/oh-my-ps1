@@ -9,9 +9,9 @@
   to make zsh more beautiful and functional.
   </p>
 	<p>
-	This configuration is basically done in shell script, making use of variables to modify almost all Fvwm features. Just read the comments of each variable to know what will happen, all very simple and easy to understand.
+	Everything was created with the intention of being simple and intuitive, in addition to being beautiful, and easy to modify, allowing the user to create or modify themes in an easy way.
 	</p>
-	<p>Below are some of the things that are being done for this configuration.</p>
+	<p>Below we see what's new!</p>
 	<br clear="right"/>
 </p>
 
