@@ -3,8 +3,11 @@
 	<img src="https://github.com/oh-my-ps1/oh-my-ps1/blob/main/fixed/init.png"
 	align="right" width="600"/>
 	<h1>Welcome   <img src="https://cdn-icons-png.flaticon.com/512/5632/5632392.png" align="center" width="30"/></h1>
-	<p>This is my personal Fvwm3 window manager configuration.</p>
-	<p>Created and modified over many years, aiming to improve and simplify settings.</p>
+	<p><strong>OK let's start!</strong></p>
+	<p>
+  This is a program, with a collection of themes and tools created
+  to make zsh more beautiful and functional.
+  </p>
 	<p>
 	This configuration is basically done in shell script, making use of variables to modify almost all Fvwm features. Just read the comments of each variable to know what will happen, all very simple and easy to understand.
 	</p>
