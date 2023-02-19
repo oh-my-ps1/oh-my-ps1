@@ -1,11 +1,10 @@
 source $(dirname "$0")/colors.zsh
 source $(dirname "$0")/icons.zsh
+#source $(dirname "$0")/config.zsh
 
 rd="%B%F{$((RANDOM % 100))}"
 
-colorsheme="dracula"
-
-case $colorsheme in
+case $colorscheme in
 	dracula) dracula ;;
 	gruvbox) gruvbox ;;
 	gruvbox-light) gruvbox-light ;;
@@ -19,10 +18,9 @@ case $colorsheme in
 	onedark) onedark ;;
 	monokai) monokai ;;
 	everforest) everforest ;;
-
+	rose-pine) rose-pine ;;
+	rose-pine-light) rose-pine-light ;;
 esac
-
-#scheme_dracula
 
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' stagedstr "${neon[4]} $i1 %f"
@@ -102,23 +100,23 @@ prompt_d()
 
 wellcome()
 {
-time=`date | cut -d" " -f4 | cut -d: -f1`
+time=`date | cut -d" " -f5 | cut -d: -f1`
 	if (("$time" >= "06")) && (("$time" <= "12"));then
-		echo -e "%B%F{$green}${s10}%B%F{$black}%B%K{$green}Good morning%k%B%F{$green}%B%K{$magenta}$s9%B%F{$white} %n%B%F{$magenta}%k$s9%f"
+		echo -e "%B%F{$black}${s10}%B%F{$black}%B%K{$green}Good morning%k%B%F{$black}%B%K{$magenta}$s9%B%F{$white} %n%B%F{$magenta}%k$s9%f"
 	elif (("$time" > "12")) && (("$time" < "18"));then
-		echo -e "%B%F{$green}${s10}%B%F{$black}%B%K{$green}Good afternoon%k%B%F{$green}%B%K{$magenta}$s9%B%F{$white} %n%B%F{$magenta}%k$s9%f"
+		echo -e "%B%F{$black}${s10}%B%F{$black}%B%K{$green}Good afternoon%k%B%F{$black}%B%K{$magenta}$s9%B%F{$white} %n%B%F{$magenta}%k$s9%f"
 	else
-		echo -e "%B%F{$green}${s10}%B%F{$black}%B%K{$green}Good night%k%B%F{$green}%B%K{$magenta}$s9%B%F{$white} %n%B%F{$magenta}%k$s9%f"
+		echo -e "%B%F{$black}${s10}%B%F{$red}%B%K{$black}%B%F{$green}Good night%k%B%F{$black}%B%K{$magenta}$s9%B%F{$white} %n%B%F{$magenta}%k$s9%f"
 	fi
 }
 
 git_prompt_info() {
 	if $(git rev-parse --is-inside-work-tree &>/dev/null); then
-   		echo "%B%F{$white}(%B%F{$green}$g4%f $vcs_info_msg_0_)"
+   		echo "%B%F{$white}(%B%F{$green}$g4 %B%F{$white}$vcs_info_msg_0_)"
 	fi
 }
 
-dir_info=' %B%F{$magenta}inside of%f: %B%F{$black}$s10%B%F{white}%B%K{$black}$(git_prompt_info) %f%2~ %k%B%F{$black}$s9%f '
+dir_info=' %B%F{$magenta}inside of%f: %B%F{$black}$s10%B%F{white}%B%K{$black}$(git_prompt_info) %B%F{$white}%2~ %k%B%F{$black}$s9%f '
 
 PROMPT="$(wellcome)"
 PROMPT+="$dir_info"
@@ -225,21 +223,32 @@ $user%f
 
 prompt_k() {
 
+time=`date '+%A, %d %B %Y %H:%M'`
 git_prompt_info(){
     if git rev-parse --git-dir > /dev/null 2>&1; then
         echo "%B%F{$green}$s10%f%K{$green}%B%F{$black} $vcs_info_msg_0_ %k%F{$green}$s9%f─"
     fi
 }
 
-
-line_size=$(tput cols)
-time=$(date '+%H:%M')
-line_count=$(( $line_size / 2))
-line=$(echo -ne "$line_size\c") 
-
-PROMPT="$rd$line %B%F{$magenta}$s10%B%K{$magenta}%B%F{$white} $time %B%F{$magenta}%k$s9%f $rd$line
+PROMPT="%B%F{$magenta}$s10%B%K{$magenta}%B%F{$black} $time %B%F{$magenta}%k$s9%f $(git_prompt_info)
 "
+}
 
-#line_out="${rd}$(line)%f $time_info ${rd}$(line)"
+prompt_l()
+{
 
+info_arq()
+{
+folder_num=$(ls -la | grep '^d' | wc -l)
+arq_num=$(ls -la | grep '^-' | wc -l)
+
+echo "%B%K{$black}%B%F{$white} folders "%B%K{$white}%B%F{$black} $folder_num%f %k\
+"%B%K{$black}%B%F{$white} files" %B%K{$white}%B%F{$black} $arq_num %k
+}
+
+dir_info='%B%K{$black}%B%F{$white} %i %k %B%F{$green}$f3 %f[%B%F{$green}%2~%f]'
+user_info='%B%F{$green}%n%f@%B%F{$green}%m%f:'
+
+PROMPT="$dir_info $user_info "
+RPROMPT='$(info_arq)'
 }

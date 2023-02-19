@@ -31,3 +31,13 @@ function delete(){
   | awk '{print $1}' | xargs -ro sudo pacman -Rscn
 
 }
+
+function list-colorsheme()
+{
+cat ~/.config/zsh/oh-my-ps1/colors.zsh | grep "()" | sed 's/[()]//g' 
+}
+
+function list-themes()
+{
+cat ~/.config/zsh/oh-my-ps1/themes.zsh | grep "^prompt" | sed 's/(.*//g'
+}
